@@ -88,7 +88,23 @@ void menu_user()
         switch (choice)
         {
         case 1:
-            break;
+            {
+                HK hk;
+                hk = Seatch_profile_user_account();
+                Search_ticket_id(hk.id);
+                FILE *fvet = fopen("data/ve/TEMP_ve.txt", "r");
+                
+                // kiem tra
+                if (fvet == NULL)
+                {
+                    printf("error: TEMP_ve.txt");
+                    exit(1);
+                }
+                Output_ticket(fvet);
+                fclose(fvet);
+                remove("data/ve/TEMP_ve.txt");
+                break;
+            }
         case 2:
         {
             getchar();
