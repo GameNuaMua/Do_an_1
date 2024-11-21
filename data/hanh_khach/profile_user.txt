@@ -1,3 +1,0 @@
-hau | 123456 | hau | nam | viet nam | 0987654321 | 23 22 1 2001
-hau1 | 12345 | nguyen van a | nam | viet nam | 32487618712 | 23 22 1 2001
-hau2 | 221122 | nguyen van ha | nam | viet nam | 572457897 | 23 22 1 2001

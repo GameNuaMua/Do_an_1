@@ -8,10 +8,13 @@
 #include "Output.h"
 
 // xoá chuyến bay
-void remove_flight()
+int remove_flight()
 {
     // khởi tạo biến
     CB cb;
+    int dem = 0;
+
+
     system("cls");
     Filtering_flight();
     //-----------------mở file
@@ -23,7 +26,14 @@ void remove_flight()
         exit(1);
     }
     //-----------------xuất
-    Output_flight_file(fcb);
+    dem = Output_flight_file(fcb);
+    if (dem == 0)
+    {
+        system("cls");
+        printf("\t\nHIEN KHONG CO CHUYEN BAY NAO!!!\n");
+        fclose(fcb);
+        return 0;
+    }
     rewind(fcb);
     //-----------------nhập mã chuyến bay cần xoá
     printf("Nhap ma chuyen bay can HUY: ");
@@ -60,14 +70,18 @@ void remove_flight()
     printf("HUY thanh cong!!!\nBam phim bat ki de thoat...\n");
     getch();
     system("cls");
+    return 0;
 }
 
 // xoá vé
-void remove_ticket()
+int remove_ticket()
 {
     // khởi tạo biến
     VE ve, ve1;
     HK hk;
+    int demv = 0;
+
+
     char id[15], ma[10];
 
     Filtering_ticket();
@@ -97,9 +111,21 @@ void remove_ticket()
             ve1 = read_ve(lineus);
             if (strcmp(hk.id,ve1.mahk) == 0)
             {
-                 display_ve(ve1);
+                display_ve(ve1);
             }
+            demv++;
            
+        }
+        if (demv == 0)
+        {
+            printf("\n\tKHONG CO VE NAO!!!\n");
+            printf("Bam phim bat ki de thoat...\n");
+            getch();
+            fclose(fve);
+            fclose(fvet);
+            remove("data/ve/TEMP_ve.txt");
+            system("cls");
+            return 0;
         }
         strcpy(id, hk.id);
     }
@@ -109,7 +135,18 @@ void remove_ticket()
     {
         getchar();
         //----------------xuất
-        Output_ticket(fve);
+        demv = Output_ticket(fve);
+        if (demv == 0)
+        {
+            printf("\n\tKHONG CO VE NAO!!!\n");
+            printf("Bam phim bat ki de thoat...\n");
+            getch();
+            fclose(fve);
+            fclose(fvet);
+            remove("data/ve/TEMP_ve.txt");
+            system("cls");
+            return 0;
+        }
         //----------------nhập id để xoá
         printf("Nhap ID nguoi can huy ve: ");
         fgets(id, 15, stdin);
@@ -139,6 +176,7 @@ void remove_ticket()
     printf("HUY thanh cong!!!\nBam phim bat ki de thoat...\n");
     getch();
     system("cls");
+    return 0;
 }
 
 // menu xoá

@@ -81,6 +81,7 @@ void pay_ticket()
     {
         case 1:
         {
+            int demcb;
             strcpy(pay.loaive,"mot chieu");
             system("cls");
             Filtering_flight();
@@ -95,7 +96,15 @@ void pay_ticket()
                 exit(1);
             }
             //-------------------xuất
-            Output_flight_file(filecb);
+            demcb = Output_flight_file(filecb);
+            if (demcb == 0)
+            {
+                system("cls");
+                printf("\n\tKHONG CO CHUYEN BAY PHU HOP!!!\n");
+                fclose(filecb);
+                remove("data/chuyen_bay/TEMP_flight.txt");
+                break;
+            }
             //---------------------------chọn chuyến bay
             cb = choose_flight(filecb);
             strcpy(pay.macb, cb.maCB);
@@ -181,6 +190,7 @@ void pay_ticket()
         }// case 1
         case 2:
         {
+            int demcb1;
             system("cls");
             strcpy(pay.loaive,"khu hoi");
             for (int j = 0; j < 2; j++)
@@ -210,7 +220,15 @@ void pay_ticket()
                     exit(1);
                 }
                 //-------------------xuất
-                Output_flight_file(filecb);
+                demcb1 = Output_flight_file(filecb);
+                if (demcb1 == 0)
+                {
+                    system("cls");
+                    printf("\n\tKHONG CO CHUYEN BAY PHU HOP!!!\n");
+                    fclose(filecb);
+                    remove("data/chuyen_bay/TEMP_flight.txt");
+                    break;// exit case 1
+                }
                 //---------------------------chọn chuyến bay
                 cb = choose_flight(filecb);
                 strcpy(pay.macb, cb.maCB);

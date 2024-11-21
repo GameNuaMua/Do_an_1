@@ -11,6 +11,8 @@ int Search_ticket_macb(char macb[])
 {
     // khai báo biến
     VE ve;
+    int dem = 0;
+
     //--------------------------mở file-----------------------
     FILE * fve = fopen("data/ve/ve.txt","r");
     FILE * fvet = fopen("data/ve/TEMP_ve.txt","w");
@@ -34,12 +36,13 @@ int Search_ticket_macb(char macb[])
         if (strcmp(ve.macb, macb) == 0)
         {
             Write_ve(fvet, ve);
+            dem++;
         }      
     }
     //-------------------------đóng file-----------------------
     fclose(fve);
     fclose(fvet);
-    return 0;
+    return dem;
 }
 
 // tìm vé máy bay theo id
@@ -47,9 +50,12 @@ int Search_ticket_id(char id[])
 {
     // khai báo biến
     VE ve;
+    int dem = 0;
+
+
     //--------------------------mở file-----------------------
     FILE * fve = fopen("data/ve/ve.txt","r");
-    FILE * fvet = fopen("data/ve/TEMP_ve.txt","r");
+    FILE * fvet = fopen("data/ve/TEMP_ve.txt","w");
     //---------------kiểm tra mở file-----------------
     if (fve == NULL)
     {   
@@ -70,12 +76,13 @@ int Search_ticket_id(char id[])
         if (strcmp(ve.mahk, id) == 0)
         {
             Write_ve(fvet, ve);
+            dem++;
         }      
     }
     //-------------------------đóng file-----------------------
     fclose(fve);
     fclose(fvet);
-    return 0;
+    return dem;
 }
 
 // tìm chuyến bay theo địa điểm và thời gian
@@ -85,6 +92,9 @@ int Seatch_flight_position_time(char tu[], char den[], int ngay, int thang, int 
     TG tg = Thoi_Gian_Hien_Tai();
     // khai báo biến
     CB cb;
+    int dem = 0;
+
+
     //---------------------------------------------mở file----------------------------------------
     FILE * fcb_temp = fopen("data/chuyen_bay/TEMP_flight.txt","w");
     FILE * fcb = fopen("data/chuyen_bay/flight.txt","r");
@@ -115,11 +125,13 @@ int Seatch_flight_position_time(char tu[], char den[], int ngay, int thang, int 
                     if (cb.ngayBay.tm_hour > tg.tm_hour || (cb.ngayBay.tm_hour == tg.tm_hour && cb.ngayBay.tm_min > tg.tm_min))
                     {
                         write_cb(fcb_temp,cb);
+                        dem++;
                     }
                 }
                 else
                 {
                     write_cb(fcb_temp,cb);
+                    dem++;
                 }
             }
         }
@@ -127,7 +139,7 @@ int Seatch_flight_position_time(char tu[], char den[], int ngay, int thang, int 
     //--------------------------------------------đóng file---------------------------------------
     fclose(fcb);
     fclose(fcb_temp);
-    return 0;
+    return dem;
 }
 
 // tìm thông tin khach hàng theo tên tk
@@ -160,10 +172,13 @@ HK Seatch_profile_user_account()
 }
 
 // tìm vé máy bay theo id
-void Seatch_ticket_id_user(char id[])
+int Seatch_ticket_id_user(char id[])
 {
     // khai báo biến
     VE ve;
+    int dem = 0;
+
+
     //-----------------------------------------------mở file------------------------------------------
     FILE *fve = fopen("data/ve/ve.txt","r");
     FILE *fvet = fopen("data/ve/TEMP_ve.txt","w");
@@ -187,11 +202,13 @@ void Seatch_ticket_id_user(char id[])
         if (strcmp(ve.mahk, id) == 0)
         {
             Write_ve(fvet, ve);
+            dem++;
         }
     }
     //----------------------------------------------đóng file-----------------------------------------
     fclose(fve);
     fclose(fvet); 
+    return dem;
 }
 
 #endif//SEARCH_H

@@ -8,10 +8,13 @@
 #include "Read_Write.h"
 
 // xuất danh sách vé theo mã chuyến bay
-void Output_ticket(FILE *file)
+int Output_ticket(FILE *file)
 {
     // khai báo biến
     VE ve;
+    int dem = 0;
+
+
     //--------------------tiêu đề---------------------------
     printf("================================================================================================DANH SACH VE======================================================================================================\n");
     printf(" %-15s | %-20s | %-10s | %-20s | %-12s | %-12s | %-12s | %-12s | %-6s | %-11s | %-10s | %-11s | %-10s | %-15s\n",
@@ -26,7 +29,9 @@ void Output_ticket(FILE *file)
     {
         ve = read_ve(lineve);
         display_ve(ve);
+        dem++;
     }
+    return dem;
 }
 
 // xuất danh sách hành khách và khách hàng
@@ -34,6 +39,7 @@ int Output_user(FILE *fhk)
 {
     // khởi tạo biến
     HK hk;
+    int dem = 0;
 
 
     //-----------------------------tiêu đề------------------------------------------
@@ -47,7 +53,7 @@ int Output_user(FILE *fhk)
     if (fhk == NULL)
     {
         printf("error: profile_user.txt\n");
-        return 1;
+        return dem;
     }
 
 
@@ -57,12 +63,13 @@ int Output_user(FILE *fhk)
     {
         hk = read_user(lineuser);
         display_user(hk);
+        dem++;
     }
 
 
     //------------------------------------------đóng file-----------------------------------------------
     fclose(fhk);
-    return 0;
+    return dem;
 }
 
 // xuất danh sách chuyến bay
@@ -70,6 +77,7 @@ int Output_flight_file(FILE *file)
 {
     // khởi tạo biến
     CB cb;
+    int dem = 0;
     //------------------------tiêu đề-----------------------------
     printf("======================================================================DANH SACH CHUYEN BAY====================================================================\n");
     printf(" %-10s | %-20s | %-12s | %-12s | %-11s | %-10s | %-11s | %-10s | %-10s | %-10s | %-15s\n",
@@ -85,13 +93,15 @@ int Output_flight_file(FILE *file)
             cb.sum = Sum(cb.maCB);
         }
         display_cb(cb);
+        dem++;
     }
-    return 0;
+    return dem;
 }
 
 // menu xuất ds chuyến bay và hành khách
 int menu_output()
 {
+    int dem;
     int choice;
     do
     {
@@ -116,50 +126,67 @@ int menu_output()
                 exit(1);
             }
             //------------------------------------------------
-            Output_flight_file(fcb);
-            //--------------------------------thêm lựa chọn--------------------------
-            int chon;
-            printf("===================XEM THEM=====================\n");
-            printf("\t1.Xuat danh sach ve\n\t2.Thoat\n");
-            printf("================================================\n");
-            printf("Chon: ");
-            scanf("%d", &chon);
-            getchar();
-            //---------------------------
-            switch (chon)
+            dem = Output_flight_file(fcb);
+            if (dem == 0)
             {
-                case 1:
+                printf("\n\tKHONG CO CHUYEN BAY NAO!!!\n");
+                printf("Bam phim bat ki de thoat...\n");
+                getch();
+                fclose(fcb);
+                system("cls");
+                break;
+            }
+            else
+            {
+                //--------------------------------thêm lựa chọn--------------------------
+                int chon;
+                printf("===================XEM THEM=====================\n");
+                printf("\t1.Xuat danh sach ve\n\t2.Thoat\n");
+                printf("================================================\n");
+                printf("Chon: ");
+                scanf("%d", &chon);
+                getchar();
+                //---------------------------
+                switch (chon)
                 {
-                    char macb[10];
-                    printf("Nhap ma chuyen bay: ");
-                    fgets(macb, 10, stdin);
-                    macb[strlen(macb) - 1] = '\0';
-                    system("cls");
-                    //-----------------------------------chạy chương trình----------------------
-                    Search_ticket_macb(macb);
-                    //--------------------------mở file-----------------------
-                    FILE * fvet = fopen("data/ve/TEMP_ve.txt","r");
-                        //---------------kiểm tra mở file-----------------
-                    if (fvet == NULL)
-                        {   
-                            printf("error: TEMP_ve.txt");
-                            exit(1);
+                    case 1:
+                    {
+                        int demv;
+                        char macb[10];
+                        printf("Nhap ma chuyen bay: ");
+                        fgets(macb, 10, stdin);
+                        macb[strlen(macb) - 1] = '\0';
+                        system("cls");
+                        //-----------------------------------chạy chương trình----------------------
+                        Search_ticket_macb(macb);
+                        //--------------------------mở file-----------------------
+                        FILE * fvet = fopen("data/ve/TEMP_ve.txt","r");
+                            //---------------kiểm tra mở file-----------------
+                        if (fvet == NULL)
+                            {   
+                                printf("error: TEMP_ve.txt");
+                                exit(1);
+                            }
+                        demv = Output_ticket(fvet);
+                        if (demv == 0)
+                        {
+                            printf("\n\tKHONG CO VE NAO!!!\n");
                         }
-                    Output_ticket(fvet);
-                    //-------------------------đóng file-----------------------
-                    fclose(fvet);
-                    remove("data/ve/TEMP_ve.txt");
-                    printf("Bam phim bat ki de thoat...\n");
-                    getch();
-                    system("cls");
-                    break;
+                        //-------------------------đóng file-----------------------
+                        fclose(fvet);
+                        remove("data/ve/TEMP_ve.txt");
+                        printf("Bam phim bat ki de thoat...\n");
+                        getch();
+                        system("cls");
+                        break;
+                    }
+                    case 2:
+                        system("cls");
+                        break;
+                    default:
+                        printf("Lua chon khong hop le\n");
+                        break;
                 }
-                case 2:
-                    system("cls");
-                    break;
-                default:
-                    printf("Lua chon khong hop le\n");
-                    break;
             }
             //-------------------------đóng file----------------------
             fclose(fcb);
@@ -167,10 +194,21 @@ int menu_output()
         }
         case 2:
         {
+            int dem1, dem2;
             FILE *f = fopen("data/hanh_khach/profile_user.txt", "r");
             FILE *f1 = fopen("data/hanh_khach/TEMP_profile_user.txt", "r");
-            Output_user(f);
-            Output_user(f1);
+            printf("Hanh khach dung app\n");
+            dem1 = Output_user(f);
+            if (dem1 == 0)
+            {
+                printf("\n\tKHONG CO THONG TIN HANH KHACH NAO!!!\n");
+            }
+            printf("Hanh khach dang ky tai quay\n");
+            dem2 = Output_user(f1);
+            if (dem2 == 0)
+            {
+                printf("\n\tKHONG CO THONG TIN HANH KHACH NAO!!!\n");
+            }
             fclose(f);
             fclose(f1);
             printf("Bam phim bat ki de thoat...");

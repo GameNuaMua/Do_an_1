@@ -90,6 +90,7 @@ void menu_user()
         case 1:
             {
                 HK hk;
+                int dem;
                 hk = Seatch_profile_user_account();
                 Search_ticket_id(hk.id);
                 FILE *fvet = fopen("data/ve/TEMP_ve.txt", "r");
@@ -100,7 +101,15 @@ void menu_user()
                     printf("error: TEMP_ve.txt");
                     exit(1);
                 }
-                Output_ticket(fvet);
+                dem = Output_ticket(fvet);
+                if (dem == 0)
+                {
+                    printf("\n\tKHONG CO VE NAO!!!\n");
+                    printf("Bam phim bat ki de thoat...\n");
+                    getch();
+                    system("cls");
+                  
+                }
                 fclose(fvet);
                 remove("data/ve/TEMP_ve.txt");
                 break;

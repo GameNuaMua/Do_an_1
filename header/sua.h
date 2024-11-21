@@ -7,12 +7,13 @@
 #include "Output.h"
 
 // chọn chuyến bay cần sửa
-void sua_cb()
+int sua_cb()
 {
     system("cls");
     //khai báo biến
     CB cb;
     char macbsua[10];
+    int dem;
 
 
     // mở file
@@ -27,7 +28,19 @@ void sua_cb()
 
 
     Filtering_flight();
-    Output_flight_file(f);
+    dem = Output_flight_file(f);
+    if (dem == 0)
+    {
+        system("cls");
+        printf("\n\tKHONG CO CHUYEN BAY NAO!!!\n");
+        fclose(f);
+        fclose(f1);
+        remove("data/chuyen_bay/TEMP_flight.txt");
+        printf("Bam phim bat ki de thoat...\n");
+        getch();
+        system("cls");
+        return 0;
+    }
     // đưa con trỏ về lại đầu file
     rewind(f);
 
@@ -90,9 +103,10 @@ void sua_cb()
     printf("Thay doi thanh cong ^-^\nBam phim bat ki de thoat...\n");
     getch();
     system("cls");
+    return 0;
 }
 
-// sửa thông tin hành khách f là profile_user(r), f1 là Temp_profile_user(w)
+// sửa thông tin hành khách f là profile_user(r), f1 là T_profile_user(w)
 void sua_hk(FILE *f, FILE *f1, char idsua[])
 {
     // khởi tạo biến
@@ -193,6 +207,7 @@ void menu_sua()
     int choice;
     do 
     {
+        int demcb2;
         system("cls");
         printf("==========================MENU SUA==========================\n");
         printf("\t\t1.Sua chuyen bay\n");
@@ -211,7 +226,16 @@ void menu_sua()
             system("cls");
             // xuất danh sách user profile
             FILE *file = fopen("data/hanh_khach/TEMP_profile_user.txt", "r");
-            Output_user(file);
+            demcb2 = Output_user(file);
+            if (demcb2 == 0)
+            {
+                fclose(file);
+                printf("\n\tKHON CO THONG TIN HANH KAHCH NAO!!!\n");
+                printf("Bam phim bat ki de thoat...\n");
+                getch();
+                system("cls");
+                break;
+            }
             fclose(file);
 
 
