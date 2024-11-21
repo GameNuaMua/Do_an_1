@@ -1,0 +1,6 @@
+vn666 | VietnamAirline | ha noi | ho chi minh | 30 11 2024 12 0 3 12 2024 5 0 3000000 1500000 0
+vn076 | VietJet | ho chi minh | nha trang | 2 12 2024 7 0 4 12 2024 8 0 10000000 1000000 0
+vn346 | VietJack | ho chi minh | ha noi | 10 12 2024 8 0 14 12 2024 6 0 2750000 1250000 0
+vn086 | VietnamAirline | nha trang | ho chi minh | 10 12 2024 5 0 11 12 2024 16 0 2400000 1200000 0
+vn091 | VietJet | hue | ho chi minh | 30 11 2024 7 0 1 12 2024 13 0 3000000 1500000 0
+vn058 | VietJack | ho chi minh | hue | 5 12 2024 9 0 6 12 2024 1 0 3500000 1200000 0

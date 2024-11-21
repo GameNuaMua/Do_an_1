@@ -1,0 +1,13 @@
+hau | 1 | 10
+hau1 | 1 | 1
+hau2 | 1 | 1
+nyx | 09 | 1
+khanh | 2 | 1
+nam | 6 | 2
+dinh | 5 | 1
+phat | 7 | 1
+dung | 3 | 1
+linh | 7 | 1
+nghia | 23 | 1
+duc | 12 | 1
+thang | 25 | 1
