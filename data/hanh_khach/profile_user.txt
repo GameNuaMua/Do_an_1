@@ -1,0 +1,17 @@
+hau | 123456 | hau | nam | viet nam | 0987654321 | 23 22 1 2001
+hau1 | 12345 | nguyen van a | nam | viet nam | 32487618712 | 23 22 1 2001
+hau2 | 221122 | nguyen van ha | nam | viet nam | 572457897 | 23 22 1 2001
+nyx | 8724 | nyx | nam | Viet Nam | 09876542 | 18 8 6 2006
+khanh | 9235 | khanh | nam | Viet Nam | 923785 | 19 8 3 2005
+nam | 93812 | nam | nam | Viet Nam | 9284 | 19 23 11 2005
+dinh | 124415 | dinh | nam | Viet Nam | 12984 | 19 12 12 2005
+phat | 12875 | phat | nam | VIet Nam | 0192 | 19 23 12 2005
+dung | 819374 | dung | nam | Viet Nam | 02835 | 18 19 1 2006
+linh | 217412 | linh | nam | Viet Nam | 02835 | 18 19 1 2006
+nghia | 842335 | nghia | nam | Viet Nam | 0439 | 19 6 2 2005
+duc | 6732 | duc | nam | Viet Nam | 01294512 | 19 2 5 2005
+thang | 28375 | thang | nam | Viet Nam | 092835 | 19 4 4 2005
+pow | 1234 | pow | nam | my | 0339912252 | 18 13 8 2006
+peo | 6677 | peo   | nam | vietnam | 15086677 | 22 12 8 2002
+poi | 02082000 | poi | nam | vietnam | 032039209 | 28 9 2 1996
+pin | 12212 | pin | nu | vietnam | 2113234234 | -974 12 12 2998

@@ -112,6 +112,9 @@ void menu_user()
                 }
                 fclose(fvet);
                 remove("data/ve/TEMP_ve.txt");
+                printf("Bam phim bat ki de thoat...!!!\n");
+                getch();
+                system("cls");
                 break;
             }
         case 2:
