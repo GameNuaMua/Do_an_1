@@ -174,6 +174,7 @@ void menu()
     {
         // menu đăng nhập
         system("cls");// xóa màn hình console
+        printf("v.1.3\n");
         printf("=================AIRLINE=================\n");
         printf("\t\t1.Dang Nhap\n");
         printf("\t\t2.Dang Ky\n");

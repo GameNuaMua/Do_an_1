@@ -103,6 +103,9 @@ void pay_ticket()
                 printf("\n\tKHONG CO CHUYEN BAY PHU HOP!!!\n");
                 fclose(filecb);
                 remove("data/chuyen_bay/TEMP_flight.txt");
+                printf("Bam phim bat ki de thoat...\n");
+                getch();
+                system("cls");
                 break;
             }
             //---------------------------chọn chuyến bay
@@ -227,6 +230,9 @@ void pay_ticket()
                     printf("\n\tKHONG CO CHUYEN BAY PHU HOP!!!\n");
                     fclose(filecb);
                     remove("data/chuyen_bay/TEMP_flight.txt");
+                    printf("Bam phim bat ki de thoat...\n");
+                    getch();
+                    system("cls");
                     break;// exit case 1
                 }
                 //---------------------------chọn chuyến bay
